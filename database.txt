@@ -1,0 +1,72 @@
+BusManagement
+===============
+BusManagementId
+BusName
+BusType
+StartPoint
+StartTime
+Amenities
+BusRegistrationNumber
+MaximumSeats
+EndPoint
+EndTime
+CreateDate
+ModifiedDate
+CreatedBy
+ModifiedBy
+
+
+BusType
+============
+BusTypeId = int 
+BusTypeName = varchar
+status  = bool
+CreateDate
+ModifiedDate
+CreatedBy
+ModifiedBy
+
+Route
+================
+RouteId
+Select Bus
+board_point
+board_time
+drop_point
+drop_time
+Price
+IsActive
+CreateDate
+ModifiedDate
+CreatedBy
+ModifiedBy
+
+
+BoardingPoint
+=====================
+BoardingPointId
+Bus Name
+New Boarding Point
+Route
+Landmark
+Start Time
+Address
+CreateDate
+ModifiedDate
+CreatedBy
+ModifiedBy
+
+DropPoint
+=====================
+DropPointId
+Bus Name
+New Dropping Point
+Landmark
+Route
+Drop Time
+Address
+CreateDate
+ModifiedDate
+CreatedBy
+ModifiedBy
+

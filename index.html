@@ -23,6 +23,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		 new WOW().init();
 	</script>
 <!--//end-animate-->
+<script type="text/javascript">
+	$("document").ready(function(){
+	  $(".js-ajax-php-json").submit(function(){
+		var data = {
+		  "From": document.getElementById("lbFromSelect").value,
+		  "To": document.getElementById("lbToSelect").value,
+		  "Journey": document.getElementById("datepicker").value,
+		};
+		data = $(this).serialize() + "&" + $.param(data);
+		$.ajax({
+		  type: "POST",
+		  dataType: "json",
+		  url: "php/BusSearch.php", //Relative or absolute path to response.php file
+		  data: data,
+		  success: function(data) {
+			$(".the-return").html(
+			  "Favorite beverage: " + data["lbFromSelect"] + "<br />Favorite restaurant: " + data["lbToSelect"] + "<br />Gender: " + data["gender"] + "<br />JSON: " + data["json"]
+			);
+	
+			alert("Form submitted successfully.\nReturned json: " + data["json"]);
+		  }
+		});
+		return false;
+	  });
+	});
+	</script>
 </head>
 <body>
 <!-- top-header -->
@@ -111,27 +137,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 	<div class="col-md-7 bann-info wow fadeInRight animated" data-wow-delay=".5s">
 		<h2>Online Tickets with Zero Booking Fees</h2>
-		<form action="">
+		<form action="php/BusSearch.php" class="js-ajax-php-json" method="post" accept-charset="utf-8">
 		<div class="ban-top">
 			<div class="bnr-left">
 				<label class="inputLabel">From</label>
-				<select name="" id="" class="city">
-					<option value="-- Select city --">-- Select city --</option>
-					<option value="Los Angeles Charter">Los Angeles Charter</option>
-					<option value="New Orleans">New Orleans Charter</option>
-					<option value="Charlotte">Charlotte Charter</option>
-					<option value="Washington">Washington Charter</option>
+				<select name="" id="lbFromSelect" class="city"></select>
+				<script type="text/javascript"> 
+				 $(function (){
+				           $.getJSON('php/Buslist.php', function (data) {
+                                        var list = $("#lbFromSelect");
+									    var str = JSON.stringify(data);
+                                        var obj = JSON.parse(str);
+										list.append("<option>-- Select city --</option>");
+                                        for (var s in obj) {
+                                                list.append("<option>"+obj[s].FromPlace+"</option>");
+                                        }
+                                              });
+				 });
+				</script>
 				</select>
 				<!-- <input class="city" type="text" value="Enter a city" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter a city';}" required=> -->
 			</div>
 			<div class="bnr-left">
 				<label class="inputLabel">To</label>
-				<select name="" id="" class="city">
-					<option value="-- Select city --">-- Select city --</option>
-					<option value="Los Angeles Charter">Los Angeles Charter</option>
-					<option value="New Orleans">New Orleans Charter</option>
-					<option value="Charlotte">Charlotte Charter</option>
-					<option value="Washington">Washington Charter</option>
+				<select name="" id="lbToSelect" class="city">
+					<script type="text/javascript"> 
+						$(function (){
+								  $.getJSON('php/Buslist.php', function (data) {
+											   var list = $("#lbToSelect");
+											   var str = JSON.stringify(data);
+											   var obj = JSON.parse(str);
+											   list.append("<option>-- Select city --</option>");
+											   for (var s in obj) {
+													   list.append("<option>"+obj[s].ToPlace+"</option>");
+											   }
+													 });
+						});
+					   </script>
 				</select>
 				<!-- <input class="city" type="text" value="Enter a city" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Enter a city';}" required=> -->
 			</div>
@@ -142,10 +184,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<label class="inputLabel">Date of Journey</label>
 				<input class="date" id="datepicker" type="text" value="dd-mm-yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'dd-mm-yyyy';}" required=>
 			</div>
-			<div class="bnr-right">
+			<!-- <div class="bnr-right">
 				<label class="inputLabel">Date of Return<span class="opt">&nbsp;(Optional)</span></label>
 				<input class="date" id="datepicker1" type="text" value="dd-mm-yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'dd-mm-yyyy';}" required=>
-			</div>
+			</div> -->
 				<div class="clearfix"></div>
 				<!---start-date-piker---->
 				<link rel="stylesheet" href="css/jquery-ui.css" />
