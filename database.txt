@@ -1,8 +1,8 @@
 BusManagement
 ===============
-BusManagementId
+BusId
 BusName
-BusType
+BusTypeId
 StartPoint
 StartTime
 Amenities
@@ -14,8 +14,9 @@ CreateDate
 ModifiedDate
 CreatedBy
 ModifiedBy
-
-
+			   
+             
+                                           
 BusType
 ============
 BusTypeId = int 
@@ -29,7 +30,7 @@ ModifiedBy
 Route
 ================
 RouteId
-Select Bus
+BusId
 board_point
 board_time
 drop_point
@@ -45,9 +46,9 @@ ModifiedBy
 BoardingPoint
 =====================
 BoardingPointId
-Bus Name
+BusId
 New Boarding Point
-Route
+RouteId
 Landmark
 Start Time
 Address
@@ -59,7 +60,7 @@ ModifiedBy
 DropPoint
 =====================
 DropPointId
-Bus Name
+BusId
 New Dropping Point
 Landmark
 Route
@@ -69,4 +70,42 @@ CreateDate
 ModifiedDate
 CreatedBy
 ModifiedBy
+===================================================================================
+filter 
+---------------
+SELECT bm.BusId, bm.BusName, bm.BusType, bm.Amenities, bp.NewBoardingPoint, dp.NewDroppingPoint
+FROM Route r
+LEFT JOIN BusManagement bm ON bm.BusId = r.BusId
+LEFT JOIN BoardingPoint bp ON bp.BusId = r.BusId
+LEFT JOIN DropPoint dp ON dp.BusId = r.BusId
+where r.board_point='chennai'
+and r.drop_point ='madurai'
 
+
+
+SELECT bm.BusId, bm.BusName, bm.BusType, bm.Amenities, r.RouteId
+FROM Route r
+JOIN BusManagement bm ON bm.BusId = r.BusId
+WHERE r.board_point =  'chennai'
+AND r.drop_point =  'madurai'
+
+
+SELECT NewBoardingPoint
+FROM BoardingPoint
+WHERE BusId
+IN (
+SELECT BusId
+FROM Route
+WHERE board_point =  'chennai'
+AND drop_point =  'madurai'
+)
+
+SELECT NewDroppingPoint
+FROM DropPoint
+WHERE BusId
+IN (
+SELECT BusId
+FROM Route
+WHERE board_point =  'chennai'
+AND drop_point =  'madurai'
+)

@@ -2568,6 +2568,13 @@ i.fa.fa-truck, i.fa.fa-user, i.fa.fa-ticket {
 select {
     width: 100%;
 }
+.bnr-left {
+    width: 100%;
+    float: none;
+ }
+ .bnr-right {
+    width: 100%;
+ }
 .agent-left textarea {
     width: 100%;
 }
@@ -2728,6 +2735,7 @@ li.seat {
 .logo {
     margin-right: 30px;
 }
+
 .banner h1 {
     padding: 2.5em 0 0;
     font-size: 40px;

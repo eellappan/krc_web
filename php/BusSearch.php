@@ -3,11 +3,17 @@ ob_start();
 include 'Config.php';
 if (is_ajax()) {
     $citylist = array();
-  if (isset($_POST["From"]) && !empty($_POST["From"]) && isset($_POST["To"]) && !empty($_POST["To"])) { //Checks if action value exists
-    $citylist["from"] = $_POST["From"];
-    $citylist["to"] = $_POST["To"];
-    $return["json"] = json_encode($citylist);
-    echo json_encode($return);
+  if (isset($_POST["board_point"]) && !empty($_POST["board_point"]) && isset($_POST["drop_point"]) && !empty($_POST["drop_point"])) { //Checks if action value exists
+        $sql = "SELECT  `board_point` ,  `drop_point` ,  `RouteId` ,  `Price` 
+		FROM  `Route` 
+		WHERE  `board_point` = '".$_POST["board_point"]."'
+		AND  `drop_point` =  '".$_POST["drop_point"]."'";
+      	 $result = mysqli_query($con, $sql) or die("MySQL error: " . mysqli_error($dbc) . "<hr>\nQuery: $query");  
+		while($row = mysqli_fetch_array($result))
+		 {
+			 $citylist[] = $row;
+		 }
+    echo json_encode($citylist);
   }
 }
 

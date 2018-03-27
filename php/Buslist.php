@@ -1,10 +1,10 @@
 <?php
 ob_start();
 include 'Config.php';
-$sql = 'SELECT `FromPlace`,`ToPlace` FROM `Route` WHERE `IsActive`=1';
-$result = mysql_query($sql);
+$sql = 'SELECT `board_point`,`drop_point` FROM `Route` WHERE `IsActive`=1';
+$result = mysqli_query($con,$sql);
 $citylist = array();
-while($row = mysql_fetch_assoc($result))
+while($row = mysqli_fetch_assoc($result))
  {
       $citylist[] = $row; 
  }

@@ -13,9 +13,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 <link href="css/font-awesome.css" rel="stylesheet">
+<link href="css/alert.css" rel="stylesheet">
+<!-- <link href="assets/css/truebus.css" rel="stylesheet"> -->
+
 <!-- Custom Theme files -->
+
 <script src="js/jquery-1.12.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/alert.js"></script>
 <!--animate-->
 <link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
 <script src="js/wow.min.js"></script>
@@ -27,9 +32,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	$("document").ready(function(){
 	  $(".js-ajax-php-json").submit(function(){
 		var data = {
-		  "From": document.getElementById("lbFromSelect").value,
-		  "To": document.getElementById("lbToSelect").value,
-		  "Journey": document.getElementById("datepicker").value,
+		   "board_point": document.getElementById("lbFromSelect").value,
+		   "drop_point": document.getElementById("lbToSelect").value,
+		  // "Journey": document.getElementById("datepicker").value,
 		};
 		data = $(this).serialize() + "&" + $.param(data);
 		$.ajax({
@@ -38,16 +43,54 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		  url: "php/BusSearch.php", //Relative or absolute path to response.php file
 		  data: data,
 		  success: function(data) {
-			$(".the-return").html(
-			  "Favorite beverage: " + data["lbFromSelect"] + "<br />Favorite restaurant: " + data["lbToSelect"] + "<br />Gender: " + data["gender"] + "<br />JSON: " + data["json"]
-			);
-	
-			alert("Form submitted successfully.\nReturned json: " + data["json"]);
-		  }
+			if(data.length > 0)
+			{
+			  //alert(data[0]["board_point"]);
+			var url = page_url+'bus1.html?from=';
+				url += data[0]["board_point"] +"&to=";
+				url += data[0]["drop_point"];
+			  window.location.href = url;
+			}
+			else 
+			{
+				$(".the-return").html(
+			swal(
+				{   
+				title: "No bus were found for this route",   
+				text: document.getElementById("lbFromSelect").value +"  TO  " +document.getElementById("lbToSelect").value,   
+				type: "error",   
+				//showCancelButton: true,   
+				confirmButtonColor: "#DD6B55",   
+				//confirmButtonText: "Remove My Account!",   
+				//cancelButtonText: "I am not sure!",   
+				closeOnConfirm: false,   
+				//closeOnCancel: false 
+				}, 
+			),
+			)
+			}
+		  },
+		  error: function(data){
+			},
 		});
 		return false;
 	  });
 	});
+
+function JSalert(board_point, drop_point){
+	swal(
+	{   title: "No bus were found for this route",   
+    text: board_point +" TO " +drop_point,   
+    type: "error",   
+    //showCancelButton: true,   
+    confirmButtonColor: "#DD6B55",   
+    //confirmButtonText: "Remove My Account!",   
+    //cancelButtonText: "I am not sure!",   
+    closeOnConfirm: false,   
+    //closeOnCancel: false 
+	}, 
+	);
+}
 	</script>
 </head>
 <body>
@@ -137,7 +180,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 	<div class="col-md-7 bann-info wow fadeInRight animated" data-wow-delay=".5s">
 		<h2>Online Tickets with Zero Booking Fees</h2>
-		<form action="php/BusSearch.php" class="js-ajax-php-json" method="post" accept-charset="utf-8">
+		<form action="php/BusSearch.php" class="js-ajax-php-json" method="post" accept-charset="utf-8"> 
 		<div class="ban-top">
 			<div class="bnr-left">
 				<label class="inputLabel">From</label>
@@ -150,7 +193,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                         var obj = JSON.parse(str);
 										list.append("<option>-- Select city --</option>");
                                         for (var s in obj) {
-                                                list.append("<option>"+obj[s].FromPlace+"</option>");
+                                                list.append("<option>"+obj[s].board_point+"</option>");
                                         }
                                               });
 				 });
@@ -169,7 +212,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											   var obj = JSON.parse(str);
 											   list.append("<option>-- Select city --</option>");
 											   for (var s in obj) {
-													   list.append("<option>"+obj[s].ToPlace+"</option>");
+													   list.append("<option>"+obj[s].drop_point+"</option>");
 											   }
 													 });
 						});
@@ -200,11 +243,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<!---/End-date-piker---->
 		</div>
 		<div class="sear">
-			<form action="bus.html">
 				<button class="seabtn">Search Buses</button>
-			</form>
 		</div>
-	</form>
+		</form>
 	</div>
 	<div class="clearfix"></div>
 </div>
@@ -517,5 +558,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 			</div>
 <!-- //write us -->
+<script>
+	
+	page_url = "http://krc.graphicconnections.media/";
+	
+	</script>
+<script src="assets/js/search.js"></script>
+<script src="assets/js/service.js"></script>
+<script src="assets/js/truebus.js"></script>
+<script src="assets/js/angular/angular.js"></script>
+<script src="assets/js/jquery.raty.js"></script>
 </body>
 </html>
