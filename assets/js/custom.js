@@ -434,7 +434,12 @@
 		 if(classs=='seater'){
 			 $(elm).addClass('selectedseat'); 
 			  $(elm).addClass('selecteds'); 
-		 }else{
+		 }
+		else if(classs=='lseater'){
+			$(elm).addClass('selectedseat'); 
+			 $(elm).addClass('selecteds'); 
+		}
+		 else{
 			 $(elm).addClass('selectedsleeper'); 
 			 $(elm).addClass('selecteds'); 
 		 }

@@ -22,6 +22,12 @@ URL mapping
 			$routeRestHandler = new RestHandler();
 			$result = $routeRestHandler->FilterBy();
 			break;
+		case "seats":
+			// to handle REST Url /route/ViewSeats/
+			$routeRestHandler = new RestHandler();
+			$result = $routeRestHandler->ViewSeats();
+			break;
+
 		case "create":
 			// to handle REST Url /mobile/create/
 			$mobileRestHandler = new MobileRestHandler();

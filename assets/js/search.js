@@ -134,18 +134,19 @@ App.directive("raty", function() {
 			
 			
 			var board_point = GetURLParameter('from');
-            var drop_point = GetURLParameter('to');
+            		var drop_point = GetURLParameter('to');
 			var date = GetURLParameter('dateJ');
 			var dateR = GetURLParameter('dateR');
-	
-	        $http({
+	 	data = {'board_point':board_point,'drop_point':drop_point};
+	    $http({
           method  : 'GET',
-          url     : base_url+'route/select_bus',
-          data    : {'board_point':board_point,'drop_point':drop_point}, //forms user object
+          url     : base_url+'route/filter_option?'+ $.param(data),
+          paramSerializer : {'board_point':board_point,'drop_point':drop_point},
+         //forms user object
           headers : {'Content-Type': 'application/JSON'} 
          }).success(function(data) {
 			 //alert(data);
-			   $scope.getbusdetails = data;
+			   $scope.getbusdetails = response;
 			   
 			    $scope.board_point = board_point;
                 $scope.drop_point = drop_point;
@@ -177,17 +178,57 @@ App.directive("raty", function() {
 				
 		$(".loader").hide();
 			
+			  
 			  });
 			post_data  ={'board_point':board_point,'drop_point':drop_point};
-		    link="route/filter_option";
+		        link="route/select_bus";
 		
 	
 			var promise = WebService.get_data( link,post_data);
 			promise.then(function(response){  
-			    $scope.filter = response;
-			});	
-		
+			   // $scope.filter = response;
+			     $scope.getbusdetails = response;
+			  
+			    $scope.board_point = board_point;
+                $scope.drop_point = drop_point;
+				$scope.dateJ = date;
+				$scope.dateR = dateR;
+				date=new Date(date);
+				today =new Date();
+				if(today<date){
+					
+					$scope.datepre="true";
+				}else{
+					$scope.datepre="false";
+				}
+				
+				$scope.date_slide = date.toISOString();
+				if(dateR!="undefined"){
+					dateRs=new Date(dateR);
+					$scope.date_slideR = dateRs.toISOString();
+					if(date<dateRs){
+							$scope.datenext="false";
+						}else{
+						 $scope.datenext="true";	
+						}
+				}else{
+						$scope.datenext="false";
+					}
+				
+				
+				
+		$(".loader").hide();
 			
+			    
+			});	
+					post_data  ={'board_point':board_point,'drop_point':drop_point};
+		        link="route/filter_option";
+		
+	
+			var promise = WebService.get_data( link,post_data);
+			promise.then(function(response){  
+			   $scope.filter = response;
+			});
 			
 			
 			 
@@ -485,7 +526,7 @@ App.directive("raty", function() {
 		$scope.paymentReturnOneway = function(oroute_id,boarding_point_id){
 			//alert(oroute_id);
 			post_data  ={'route_id':oroute_id,'boarding_point_id':boarding_point_id};
-			link="search/select_one_bus";
+			link="route/select_one_bus";
 			
 		var res ="";
 			var promise = WebService.send_data( link,post_data);

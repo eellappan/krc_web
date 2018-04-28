@@ -34,7 +34,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		var data = {
 		   "board_point": document.getElementById("lbFromSelect").value,
 		   "drop_point": document.getElementById("lbToSelect").value,
-		  // "Journey": document.getElementById("datepicker").value,
+		   "datej_picker": document.getElementById("datepicker").value,
 		};
 		data = $(this).serialize() + "&" + $.param(data);
 		$.ajax({
@@ -48,7 +48,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			  //alert(data[0]["board_point"]);
 			var url = page_url+'bus1.html?from=';
 				url += data[0]["board_point"] +"&to=";
-				url += data[0]["drop_point"];
+				url += data[0]["drop_point"]+"&dateJ=";
+				url += document.getElementById("datepicker").value+"&dateR=undefined";
+				
 			  window.location.href = url;
 			}
 			else 
@@ -145,15 +147,12 @@ function JSalert(board_point, drop_point){
 				<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
 					<nav class="cl-effect-1">
 						<ul class="nav navbar-nav">
-							<li><a href="about.html">About</a></li>
-								<li><a href="faq.html">Faq</a></li>
-								<li><a href="apps.html">Apps</a></li>
-								<li><a href="blog.html">Blog</a></li>
-								<li><a href="travels.html">Travels</a></li>
-								<li><a href="privacy.html">Privacy Policy</a></li>
-								<li><a href="agent.html">Agent Registration</a></li>
-								<li><a href="terms.html">Terms of Use</a></li>
-								<li><a href="contact.html">Contact Us</a></li>
+								<li><a href="index.html">Home</a></li>
+								<li><a href="#">Edit or Cancel</a></li>
+								<li><a href="#">Print Ticket</a></li>
+								<li><a href="#">Gallery</a></li>
+								<li><a href="#">Feedback</a></li>
+								<li><a href="#">Contact Us</a></li>
 								<li>Need Help?<a href="#" data-toggle="modal" data-target="#myModal3"> / Write Us </a>  </li>
 								<div class="clearfix"></div>
 						</ul>
@@ -239,6 +238,13 @@ function JSalert(board_point, drop_point){
 						$(function() {
 						$( "#datepicker,#datepicker1" ).datepicker();
 						});
+						$('#datepicker').datepicker(
+							{ 
+								minDate: 0,
+								beforeShow: function() {
+								$(this).datepicker('option', 'maxDate', $('#to').val());
+							}
+						});
 					</script>
 			<!---/End-date-piker---->
 		</div>
@@ -255,34 +261,34 @@ function JSalert(board_point, drop_point){
 	<div class="rupes">
 		<div class="col-md-4 rupes-left wow fadeInDown animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInDown;">
 			<div class="rup-left">
-				<a href="offers.html"><i class="fa fa-usd"></i></a>
+				<a href="#"><i class="fa fa-ticket"></i></a>
 			</div>
 			<div class="rup-rgt">
-				<h3>UP TO USD. 50 OFF</h3>
-				<h4><a href="offers.html">TRAVEL SMART</a></h4>
+				<h3>UP TO Rs.50 OFF</h3>
+				<h4><a href="#">TRAVEL SMART</a></h4>
 				<p>CODE:YBMAR12<br>Book Using Pay Money</p>
 			</div>
 				<div class="clearfix"></div>
 		</div>
 		<div class="col-md-4 rupes-left wow fadeInDown animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInDown;">
 			<div class="rup-left">
-				<a href="offers.html"><i class="fa fa-h-square"></i></a>
+				<a href="#"><i class="fa fa-h-square"></i></a>
 			</div>
 			<div class="rup-rgt">
 				<h3>UP TO 70% OFF</h3>
-				<h4><a href="offers.html">ON HOTELS ACROSS WORLD</a></h4>
+				<h4><a href="#">ON HOTELS ACROSS WORLD</a></h4>
 				<p>Offer CODE:YBMAR12</p>
 			</div>
 				<div class="clearfix"></div>
 		</div>
 		<div class="col-md-4 rupes-left wow fadeInDown animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInDown;">
 			<div class="rup-left">
-				<a href="offers.html"><i class="fa fa-mobile"></i></a>
+				<a href="#"><i class="fa fa-mobile"></i></a>
 			</div>
 			<div class="rup-rgt">
-				<h3>FLAT USD. 50 OFF</h3>
-				<h4><a href="offers.html">BUS APP OFFER</a></h4>
-				<p>book via the yellow Bus App<br>CODE:YBMAR12</p>
+				<h3>FLAT Rs.50 OFF</h3>
+				<h4><a href="#">BUS APP OFFER</a></h4>
+				<p>book via the Bus App<br>CODE:YBMAR12</p>
 			</div>
 				<div class="clearfix"></div>
 		</div>
@@ -311,12 +317,12 @@ function JSalert(board_point, drop_point){
 <div class="container">
 	<div class="track">
 		<div class="col-md-6 track-right wow fadeInLeft animated" data-wow-delay=".5s">
-			<a href="track.html"><img src="images/map1.png" class="img-responsive" alt=""></a>
+			<a href="#"><img src="images/map1.png" class="img-responsive" alt=""></a>
 		</div>
 		<div class="col-md-6 track-left wow fadeInRight animated" data-wow-delay=".5s">
 			<h3>TRACK MY BUS</h3>
 			<p>First of its own kind,bus tracking feature on bus</p>
-			<a href="track.html" class="learn">Learn More</a>
+			<a href="#" class="learn">Learn More</a>
 		</div>
 			<div class="clearfix"></div>
 	</div>
@@ -335,11 +341,11 @@ function JSalert(board_point, drop_point){
 			</div>
 				<div class="clearfix"></div>
 		</div>
-		<div class="col-md-4 routes-left">
+		<div class="col-md-4 routes-left  wow fadeInRight animated" data-wow-delay=".5s">
 			<div class="rou-left">
 				<a href="#"><i class="fa fa-user"></i></a>
 			</div>
-			<div class="rou-rgt">
+			<div class="rou-rgt wow fadeInDown animated" data-wow-delay=".5s">
 				<h3>1900</h3>
 				<p>BUS OPERATORS</p>
 			</div>
@@ -349,7 +355,7 @@ function JSalert(board_point, drop_point){
 			<div class="rou-left">
 				<a href="#"><i class="fa fa-ticket"></i></a>
 			</div>
-			<div class="rou-rgt">
+			<div class="rou-rgt wow fadeInDown animated" data-wow-delay=".5s">
 				<h3>7,00,00,000+</h3>
 				<p>TICKETS SOLD</p>
 			</div>
@@ -361,51 +367,51 @@ function JSalert(board_point, drop_point){
 <!--- /routes ---->
 <!--- footer-top ---->
 <div class="footer-top">
-	<div class="container">
-		<div class="col-md-6 footer-left wow fadeInLeft animated" data-wow-delay=".5s">
-			<h3>Bus Operators</h3>
-				<ul>
-					<li><a href="bus.html">New York  Charter </a></li>
-					<li><a href="bus.html">Washington Charter</a></li>
-					<li><a href="bus.html">Los Angeles Charter</a></li>
-					<li><a href="bus.html">Chicago Charter</a></li>
-					<li><a href="bus.html">Orlando Charter</a></li>
-					<li><a href="bus.html">New Orleans Charter</a></li>
-					<li><a href="bus.html">Houston Charter</a></li>
-					<li><a href="bus.html">Nashville Charter</a></li>
-					<li><a href="bus.html">Charlotte Charter</a></li>
-					<li><a href="bus.html">Toronto Charter</a></li>
-					<li><a href="bus.html">Washington Charter</a></li>
-					<li><a href="bus.html">Los Angeles Charter</a></li>
-					<li><a href="bus.html">Chicago Charter</a></li>
-					<li><a href="bus.html">Orlando Charter</a></li>
-					<li><a href="bus.html">New Orleans Charter</a></li>
-					<div class="clearfix"></div>
-				</ul>
-		</div>
-		<div class="col-md-6 footer-left wow fadeInRight animated" data-wow-delay=".5s">
+		<div class="container">
+		  <div class="col-md-6 footer-left wow fadeInLeft animated" data-wow-delay=".5s">
 			<h3>Bus Routes</h3>
-				<ul>
-					<li><a href="travels.html">Alabama-California</a></li>
-					<li><a href="travels.html">Alaska-Colorado</a></li>
-					<li><a href="travels.html">Arizona-Delaware</a></li>
-					<li><a href="travels.html">Arkansas-Florida</a></li>
-					<li><a href="travels.html">Kansas-Georgia</a></li>
-					<li><a href="travels.html">Iowa-Hawaii</a></li>
-					<li><a href="travels.html">Indiana-Illinois</a></li>
-					<li><a href="travels.html">Illinois-Florida</a></li>
-					<li><a href="travels.html">Idaho-Indiana</a></li>
-					<li><a href="travels.html">Hawaii-Iowa</a></li>
-					<li><a href="travels.html">Georgia-Kansas</a></li>
-					<li><a href="travels.html">Florida-Arkansas</a></li>
-					<li><a href="travels.html">Delaware-Arizona</a></li>
-					<li><a href="travels.html">Colorado-Alaska</a></li>
-					<li><a href="travels.html">California-Alabama</a></li>
-					<div class="clearfix"></div>
-				</ul>
+			  <ul>
+				<li><a href="index.html">Annur</a></li>
+				<li><a href="index.html">Avinashi</a></li>
+				<li><a href="index.html">Bhavani</a></li>
+				<li><a href="index.html">Chennai</a></li>
+				<li><a href="index.html">Chithode By Pass</a></li>
+				<li><a href="index.html">Coimbatore</a></li>
+				<li><a href="index.html">Coonoor</a></li>
+				<li><a href="index.html">Gobichettipalayam</a></li>
+				<li><a href="index.html">Karur</a></li>
+				<li><a href="index.html">Kumbakonam</a></li>
+				<li><a href="index.html">Madurai</a></li>
+				<li><a href="index.html">Mayiladuthurai</a></li>
+				<li><a href="index.html">Mettupalayam</a></li>
+				<li><a href="index.html">Namakkal</a></li>
+				<li><a href="index.html">Ooty</a></li>
+				<div class="clearfix"></div>
+			  </ul>
+		  </div>
+		  <div class="col-md-6 footer-left wow fadeInRight animated" data-wow-delay=".5s">
+			<br><br>
+			  <ul>
+				<li><a href="index.html">Palladam</a></li>
+				<li><a href="index.html">Paramathi</a></li>
+				<li><a href="index.html">Paramathivellore</a></li>
+				<li><a href="index.html">Pattukotai</a></li>
+				<li><a href="index.html">Pollachi</a></li>
+				<li><a href="index.html">Puliyampatti</a></li>
+				<li><a href="index.html">Punjai Puliyampatti</a></li>
+				<li><a href="index.html">Rasipuram</a></li>
+				<li><a href="index.html">Sathyamangalam</a></li>
+				<li><a href="index.html">Tanjore</a></li>
+				<li><a href="index.html">Thanjavur</a></li>
+				<li><a href="index.html">Tirupur</a></li>
+				<li><a href="index.html">Trichy</a></li>
+				<li><a href="index.html">Udumalaipet</a></li>
+				<li><a href="index.html">Velayuthampalayam</a></li>
+				<div class="clearfix"></div>
+			  </ul>
+		  </div>
+		  <div class="clearfix"></div>
 		</div>
-		<div class="clearfix"></div>
-	</div>
 </div>
 <!--- /footer-top ---->
 <!---copy-right ---->
@@ -421,7 +427,7 @@ function JSalert(board_point, drop_point){
 				<li><a class="dribbble" href="#"><span>Dribbble</span></a></li>
 			</ul>
 		</div>
-		<p class="wow zoomIn animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">© 2016 Green Wheels . All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+		<p class="wow zoomIn animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">© 2018 . All Rights Reserved | Design by  <a href="http://graphicconnections.media" target="_blank">graphicconnections</a> </p>
 	</div>
 </div>
 <!--- /copy-right ---->

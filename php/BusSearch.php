@@ -13,6 +13,7 @@ if (is_ajax()) {
 		 {
 			 $citylist[] = $row;
 		 }
+		 $citylist["datej_picker"] =$_POST["datej_picker"];
     echo json_encode($citylist);
   }
 }

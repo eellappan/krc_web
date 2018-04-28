@@ -10,7 +10,7 @@ class Route {
             $boardPoint = $_GET['board_point'];
             $dropPoint = $_GET['drop_point'];
 	        $query = "SELECT * FROM Route WHERE  `board_point` =  '".$boardPoint."' AND  `drop_point` =  '".$dropPoint."'";
-        }
+        }   
         $dbcontroller = new DBController();
 		$this->selected_bus = $dbcontroller->executeSelectQuery($query);
 		return $this->selected_bus;
@@ -43,7 +43,7 @@ class Route {
                                                  AND  drop_point =  '".$dropPoint."')";
      
         $bus_name = $dbcontroller->executeSelectQuery($busName);
-        $filter["bus_names"] = str_replace("\""," ",json_encode($bus_name));
+        $filter["bus_names"] = json_encode($bus_name);
         
         $busType = "SELECT DISTINCT BusType AS bus_type 
                         FROM BusManagement 
@@ -53,7 +53,7 @@ class Route {
                                         AND  drop_point =  '".$dropPoint."')";
 
         $bus_type = $dbcontroller->executeSelectQuery($busType);
-        $filter["bus_types"] =str_replace("\""," ",json_encode($bus_type));
+        $filter["bus_types"] =json_encode($bus_type);
 
          $str .= "[";
          $bustype = array();
@@ -63,7 +63,7 @@ class Route {
            $str .= $str1;
         }
        $str.="]";
-       $filter["Amenities"]  = str_replace("\""," ",json_encode($str));
+       $filter["Amenities"]  = json_encode($str);
      
         $bPointInfo = "SELECT NewBoardingPoint AS bpoints
                             FROM BoardingPoint
@@ -81,11 +81,28 @@ class Route {
                                                   WHERE board_point =  '".$boardPoint."'
                                                   AND  drop_point =  '".$dropPoint."')";
         $dp_details = $dbcontroller->executeSelectQuery($dPointInfo);
-        $filter["Stoppoint"] = str_replace("\""," ",json_encode($dp_details));
+        $filter["Stoppoint"] = json_encode($dp_details);
         //echo json_encode($filter);
     }
-    return $this->filter;
+    return $filter;//$this->filter;
    }
+   
+   public function GetSelectedBusSeatDetails()
+   {
+    $selected_bus = array();
+    if(isset($_GET['board_point']) && $_GET['drop_point'] && $_GET['route_id'])
+    {
+        $boardPoint = $_GET['board_point'];
+        $dropPoint = $_GET['drop_point'];
+        $routeId = $_GET['route_id'];
+        $query = "SELECT * FROM Route WHERE  `board_point` =  '".$boardPoint."' AND  `drop_point` =  '".$dropPoint."'";
+    }   
+    $dbcontroller = new DBController();
+    $this->selected_bus = $dbcontroller->executeSelectQuery($query);
+    return $this->selected_bus;
+   }
+   
+
 }
 
 ?>

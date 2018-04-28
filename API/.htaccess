@@ -11,6 +11,10 @@ RewriteRule ^route/filter_option/$   RestController.php?page_key=filter [nc,qsa]
 RewriteRule ^route/filter_option$   RestController.php?page_key=filter [nc,qsa]
 RewriteRule ^route/filter_option$   route/filter_option/  [L,R=301]
 
+RewriteRule ^route/select_bus_seats/$   RestController.php?page_key=seats [nc,qsa]
+RewriteRule ^route/select_bus_seats$   RestController.php?page_key=seats [nc,qsa]
+RewriteRule ^route/select_bus_seats$   route/select_bus_seats/  [L,R=301]
+
 RewriteRule ^mobile/create/$   RestController.php?page_key=create [L]
 RewriteRule ^mobile/create$   mobile/create/ [L,R=301]
 
